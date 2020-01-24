@@ -13,7 +13,7 @@ def students_form():
 @app.route("/students/<student_id>/", methods=["POST"])
 def students_set_done(student_id):
     t = Student.query.get(student_id)
-    t.studentnumber = 12345
+    t.studentnumber = 0
     db.session().commit()
 
     return redirect(url_for("students_index"))
