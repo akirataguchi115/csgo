@@ -6,7 +6,8 @@ The course database table has a `completionDate` attribute and 0...n prequisite 
 ![Entity Relation](https://github.com/akirataguchi115/csgo/blob/master/documentation/csgo_tietokantakaavio.png)
 The entity relations were made in [draw.io](https://draw.io). Linking multiple `Degree`s to multiple `Student`s wouldn't be in the scope of this project because some study programs can be forged from a variety of optional courses. This would create a bit too complex one-to-many relationship from `Degree` to `Course`s and vice versa.
 The `completionDate` is built as an enum (1-4)+completion year referring to study periods during a certain year. The `completionDate` could also be a `Date` type and could simple be compared in days f.ex.
-```Course: startingDate=13-01-2020
+```
+Course: startingDate=13-01-2020
 (prequisite)Course: completionDate=12-01-2020
 ```
 In this case the prequisites area met as the diff `Course.startingDate - (prequisite)Course.completionDate >= 1 days`. This way the `completionDate` attribute doesn't become a problem as an attribute.
