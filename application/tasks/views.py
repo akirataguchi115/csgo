@@ -13,14 +13,14 @@ def tasks_form():
 @app.route("/tasks/<task_id>/", methods=["POST"])
 def tasks_set_done(task_id):
     t = Task.query.get(task_id)
-    t.done = True
+    t.studentnumber = 12345
     db.session().commit()
 
     return redirect(url_for("tasks_index"))
 
 @app.route("/tasks/", methods=["POST"])
 def tasks_create():
-    t = Task(request.form.get("name"))
+    t = Task(request.form.get("name"), request.form.get("studentnumber"))
 
     db.session().add(t)
     db.session().commit()

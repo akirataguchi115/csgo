@@ -7,8 +7,8 @@ class Task(db.Model):
     onupdate=db.func.current_timestamp())
 
     name = db.Column(db.String(144), nullable=False)
-    done = db.Column(db.Boolean, nullable=False)
+    studentnumber = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, name):
+    def __init__(self, name, studentnumber):
         self.name = name
-        self.done = False
+        self.studentnumber = studentnumber
