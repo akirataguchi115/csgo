@@ -3,7 +3,7 @@
 {% block body %}
 <p>1st. form: Student's name</p>
 <p>2nd. form: Studetnumber</p>
-<form method="POST" action="{{ url_for('tasks_create') }}">
+<form method="POST" action="{{ url_for('students_create') }}">
   <input type="text" name="name"/>
   <input type="text" name="studentnumber"/>
   <input type="submit" value="Create a new user"/>

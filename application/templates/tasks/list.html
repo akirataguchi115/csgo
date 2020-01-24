@@ -7,12 +7,12 @@
       <th>Student ID number</th>
       <th></th>
     </tr>
-    {% for task in tasks %}
+    {% for student in students %}
     <tr>
-      <td>{{ task.name }}</td>
-      <td>{{ task.studentnumber }}</td>
+      <td>{{ student.name }}</td>
+      <td>{{ student.studentnumber }}</td>
       <td>
-	<form method="POST" action="{{ url_for('tasks_set_done', task_id=task.id) }}">
+	<form method="POST" action="{{ url_for('students_set_done', student_id=student.id) }}">
 	  <input type="submit" value="Change status!"/>
 	</form>
       </td>

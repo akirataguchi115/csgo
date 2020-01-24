@@ -1,28 +1,28 @@
 from application import app, db
 from flask import redirect, render_template, request, url_for
-from application.tasks.models import Task
+from application.tasks.models import Student
 
-@app.route("/tasks", methods=["GET"])
-def tasks_index():
-    return render_template("tasks/list.html", tasks = Task.query.all())
+@app.route("/students", methods=["GET"])
+def students_index():
+    return render_template("tasks/list.html", students = Student.query.all())
 
-@app.route("/tasks/new/")
-def tasks_form():
+@app.route("/students/new/")
+def students_form():
     return render_template("tasks/new.html")
 
-@app.route("/tasks/<task_id>/", methods=["POST"])
-def tasks_set_done(task_id):
-    t = Task.query.get(task_id)
+@app.route("/students/<student_id>/", methods=["POST"])
+def students_set_done(student_id):
+    t = Student.query.get(student_id)
     t.studentnumber = 12345
     db.session().commit()
 
-    return redirect(url_for("tasks_index"))
+    return redirect(url_for("students_index"))
 
-@app.route("/tasks/", methods=["POST"])
-def tasks_create():
-    t = Task(request.form.get("name"), request.form.get("studentnumber"))
+@app.route("/students/", methods=["POST"])
+def students_create():
+    t = Student(request.form.get("name"), request.form.get("studentnumber"))
 
     db.session().add(t)
     db.session().commit()
   
-    return redirect(url_for("tasks_index"))
+    return redirect(url_for("students_index"))
