@@ -1,6 +1,6 @@
 from application import app, db
 from flask import redirect, render_template, request, url_for
-from application.tasks.models import Student
+from application.students.models import Student
 
 @app.route("/students", methods=["GET"])
 def students_index():
