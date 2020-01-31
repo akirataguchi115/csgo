@@ -1,6 +1,6 @@
 # Course Scheduler: Graduating On-time
 `csgo` is course Scheduler that allows the student to plan one's courses in the way that the soft(or hard) prequisites are met. This way the student can attend courses that are in *topological* order.
-The application is live [here](https://csgoplanner.herokuapp.com/)
+The application is live [here](https://csgoplanner.herokuapp.com/). One can log in with the test account with the username `test` and the password `admin`.
 ## Functions
 The course database table has a `completionDate` attribute and 0...n prequisite `Course`s. These `Course`s are joined to the prequisite `Course` with a join table(see the database diagram below).
 [User stories](https://github.com/akirataguchi115/csgo/blob/master/documentation/userstories.md) can be read here.
