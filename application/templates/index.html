@@ -1,4 +1,23 @@
 {% extends "layout.html" %}
 
 {% block body %}
+<p>
+  Hello world!
+</p>
+
+{% if needs_students is defined %}
+<p>
+  The following users need to register their students:
+</p>
+
+<ul>
+	{% for user in needs_students %}
+	<li>
+	  <b>User id: </b>{{user.id}}<b> User name: </b>{{user.name}}
+	</li>
+	{% endfor %}
+</ul>
+
+{% endif %}
+
 {% endblock %}

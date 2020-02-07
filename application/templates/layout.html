@@ -3,12 +3,13 @@
     <head>
       <meta charset="utf-8">
       <title>Course Planner: Graduate On-time</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
     
     <body>
       {% if current_user.is_authenticated %}
       <p>
-      Kirjautunut nimellä {{ current_user.name }}. <a href="{{ url_for('auth_logout') }}">Kirjaudu ulos</a>
+        Kirjautunut nimellä {{ current_user.name }}. <a href="{{ url_for('auth_logout') }}">Kirjaudu ulos</a>
       </p>
       {% else %}
       <a href="{{ url_for('auth_login') }}">Kirjaudu</a>
@@ -16,7 +17,7 @@
 
       <ul>
 	<li><a href="{{ url_for('students_index') }}">Show all students</a></li>
-	<li><a href="{{ url_for('students_form') }}">Add an user</a></li>
+	<li><a href="{{ url_for('students_form') }}">Add a student</a></li>
       </ul>
       
       {% block body %}
@@ -24,5 +25,9 @@
 	Content.
       </p>
       {% endblock %}
+
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
   </html>
