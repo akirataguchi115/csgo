@@ -7,3 +7,6 @@ Attributes: id, name, student number
 
 ### Account
 Attributes: id, name, username, password
+
+### Degree
+Attributes: id, points, university
