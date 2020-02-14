@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{{ error }}
+<form method="POST" action="{{ url_for('auth_register') }}">
+  <p>Fill in your new username and password then hit the <i>Register</i> -button:</p>
+	<div class="form-group">
+		<table>
+    <tr>
+      <td>
+	{{ form.username.label }}
+      </td>
+      <td>
+	{{ form.username }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+	{{ form.password.label }}
+      </td>
+      <td>
+	{{ form.password }}
+      </td>
+    </tr>
+	</div>
+    <tr>
+      <td colspan="2">
+	<input type="submit" class="btn btn-primary" value="Register"/>
+      </td>
+    </tr>
+</form>
+{% endblock %}

@@ -16,6 +16,10 @@
 	  <input type="submit" value="Change ID to 0"/>
 	</form>
       </td>
+    <td>
+    <form method="POST" action="{{ url_for('students_delete', student_id=student.id) }}">
+      <input type="submit" value="Remove student"/>
+    </td>
     </tr>
     {% endfor %}
   </table>

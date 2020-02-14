@@ -1,13 +1,15 @@
 from flask import redirect, render_template, request, url_for
-from flask_login import login_required, current_user
+from flask_login import current_user
 
-from application import app, db
+from application import app, db, login_required 
 from application.students.models import Student
 from application.students.forms import StudentForm
 
 @app.route("/students", methods=["GET"])
+@login_required
 def students_index():
-    return render_template("students/list.html", students = Student.query.all())
+    return render_template("students/list.html", students = Student.query.filter(Student.account_id == current_user.id))
+    # return render_template("students/list.html", students = Student.query.all())
 
 @app.route("/students/new/")
 @login_required
@@ -24,7 +26,7 @@ def students_set_done(student_id):
     return redirect(url_for("students_index"))
 
 @app.route("/students/", methods=["POST"])
-@login_required
+@login_required(role="USER")
 def students_create():
     form = StudentForm(request.form)
 
@@ -38,4 +40,13 @@ def students_create():
     db.session().add(t)
     db.session().commit()
   
+    return redirect(url_for("students_index"))
+
+@app.route("/students/del/<student_id>", methods=["POST"])
+@login_required(role="USER")
+def students_delete(student_id):
+    t = Student.query.get(student_id)
+    db.session().delete(t)
+    db.session().commit()
+
     return redirect(url_for("students_index"))

@@ -30,6 +30,9 @@ class User(Base):
     def is_authenticated(self):
         return True
 
+    def roles(self):
+        return ["USER"]
+
     @staticmethod
     def find_users_with_no_students(done=0):
         stmt = text("SELECT Account.id, Account.name FROM Account"
