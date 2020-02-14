@@ -18,4 +18,4 @@ Course: startingDate=13-01-2020
 In this case the prequisites area met as the diff `Course.startingDate - (prequisite)Course.completionDate >= 1 days`. This way the `completionDate` attribute doesn't become a problem as an attribute.
 The `PrequisiteCourse` implementation will most likely be the most complicated part of this project.
 #### What's left out
-Linking multiple `Degree`s to multiple `Student`s wouldn't be in the scope of this project because some study programs can be forged from a variety of optional courses. This would create a bit too complex one-to-many relationship from `Degree` to `Course`s and vice versa.
+-
