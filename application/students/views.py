@@ -1,52 +1,40 @@
-from flask import redirect, render_template, request, url_for
-from flask_login import current_user
+from flask import render_template, request, redirect, url_for
+from flask_login import login_user, logout_user
 
-from application import app, db, login_required 
-from application.students.models import Student
-from application.students.forms import StudentForm
+from application import app, db
+from application.students.models import Student 
+from application.students.forms import LoginForm, RegisterForm
 
-@app.route("/students", methods=["GET"])
-@login_required
-def students_index():
-    return render_template("students/list.html", students = Student.query.filter(Student.account_id == current_user.id))
-    # return render_template("students/list.html", students = Student.query.all())
+@app.route("/students/login", methods = ["GET", "POST"])
+def students_login():
+    if request.method == "GET":
+        return render_template("students/loginform.html", form = LoginForm())
 
-@app.route("/students/new/")
-@login_required
-def students_form():
-    return render_template("students/new.html", form = StudentForm())
+    form = LoginForm(request.form)
+    # mahdolliset validoinnit
 
-@app.route("/students/<student_id>/", methods=["POST"])
-@login_required
-def students_set_done(student_id):
-    t = Student.query.get(student_id)
-    t.studentnumber = 0
+    user = Student.query.filter_by(username=form.username.data, password=form.password.data).first()
+    if not user:
+        return render_template("students/loginform.html", form = form,
+                               error = "No such username or password")
+
+
+    login_user(user)
+    return redirect(url_for("index"))
+
+@app.route("/students/logout")
+def students_logout():
+    logout_user()
+    return redirect(url_for("index"))
+
+@app.route("/students/register", methods = ["GET", "POST"])
+def students_register():
+    if request.method == "GET":
+            return render_template("students/registerform.html", form = RegisterForm())
+
+    form = RegisterForm(request.form)
+    u = Student("General User", form.username.data, form.password.data)
+
+    db.session().add(u)
     db.session().commit()
-
-    return redirect(url_for("students_index"))
-
-@app.route("/students/", methods=["POST"])
-@login_required(role="USER")
-def students_create():
-    form = StudentForm(request.form)
-
-    if not form.validate():
-        return render_template("students/new.html", form = form)
-
-    t = Student(form.name.data)
-    t.studentnumber = form.number.data
-    t.account_id = current_user.id
-
-    db.session().add(t)
-    db.session().commit()
-  
-    return redirect(url_for("students_index"))
-
-@app.route("/students/del/<student_id>", methods=["POST"])
-@login_required(role="USER")
-def students_delete(student_id):
-    t = Student.query.get(student_id)
-    db.session().delete(t)
-    db.session().commit()
-
-    return redirect(url_for("students_index"))
+    return redirect(url_for("index"))

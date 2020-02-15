@@ -51,16 +51,16 @@ from application import views
 from application.students import models
 from application.students import views
 
-from application.auth import models
-from application.auth import views
+from application.courses import models
+from application.courses import views
 
 # login functionality part 2
-from application.auth.models import User
+from application.students.models import Student
 
 # create database tables if non existing
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(user_id)
+    return Student.query.get(user_id)
 try:
     db.create_all()
 except:

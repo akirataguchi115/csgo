@@ -7,17 +7,17 @@
       <th>Student ID number</th>
       <th></th>
     </tr>
-    {% for student in students %}
+    {% for course in courses %}
     <tr>
-      <td>{{ student.name }}</td>
-      <td>{{ student.studentnumber }}</td>
+      <td>{{ course.name }}</td>
+      <td>{{ course.coursenumber }}</td>
       <td>
-	<form method="POST" action="{{ url_for('students_set_done', student_id=student.id) }}">
+	<form method="POST" action="{{ url_for('courses_set_done', course_id=course.id) }}">
 	  <input type="submit" value="Change ID to 0"/>
 	</form>
       </td>
     <td>
-    <form method="POST" action="{{ url_for('students_delete', student_id=student.id) }}">
+    <form method="POST" action="{{ url_for('courses_delete', course=course.id) }}">
       <input type="submit" value="Remove student"/>
     </td>
     </tr>

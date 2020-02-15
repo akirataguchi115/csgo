@@ -16,18 +16,18 @@
 	      <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('students_index') }} ">Show all students</a>
+              <a class="nav-link" href="{{ url_for('courses_index') }} ">Show all Courses</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('students_form') }} ">Add a student</a>
+              <a class="nav-link" href="{{ url_for('courses_form') }} ">Add a Course</a>
             </li>
           </ul>
           <div class="form-inline mt-2 mt-md-0">
 	    {% if current_user.is_authenticated %}
-	    <a href="{{ url_for('auth_logout') }}">Hello {{ current_user.name }} -- Logout</a>
+	    <a href="{{ url_for('students_logout') }}">Hello {{ current_user.name }} -- Logout</a>
 	    {% else %}
-	    <a href="{{ url_for('auth_login') }}">Login</a>
-      <a href="{{ url_for('auth_register') }}">Register</a>
+	    <a href="{{ url_for('students_login') }}">Login</a>
+      <a href="{{ url_for('students_register') }}">Register</a>
 	    {% endif %}
           </div>
 	</div>
