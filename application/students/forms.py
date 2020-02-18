@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, StringField
+from wtforms import PasswordField, StringField, IntegerField
 
 class LoginForm(FlaskForm):
     username = StringField("Username")
@@ -11,6 +11,8 @@ class LoginForm(FlaskForm):
 class RegisterForm(FlaskForm):
     username = StringField("New username")
     password = PasswordField("New password")
+    name = StringField("Name")
+    studentnumber = IntegerField("Student number")
    
     class Meta:
         csrf = False

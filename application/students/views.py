@@ -33,8 +33,8 @@ def students_register():
             return render_template("students/registerform.html", form = RegisterForm())
 
     form = RegisterForm(request.form)
-    u = Student("General User", form.username.data, form.password.data)
+    s = Student(form.username.data, form.password.data, form.name.data, form.studentnumber.data)
 
-    db.session().add(u)
+    db.session().add(s)
     db.session().commit()
     return redirect(url_for("index"))
