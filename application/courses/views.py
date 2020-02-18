@@ -8,16 +8,16 @@ from application.courses.forms import CourseForm
 @app.route("/courses", methods=["GET"])
 @login_required
 def courses_index():
-    return render_template("courses/list.html", courses = Course.query.filter(Course.student_id == current_user.id))
+    return render_template("courses/list.html", coursecompletions = Course.query.filter(Course.student_id == current_user.id))
 
 @app.route("/courses/new/")
 @login_required
 def courses_form():
     return render_template("courses/new.html", form = CourseForm())
 
-@app.route("/courses/<course_id>/", methods=["POST"])
+@app.route("/courses/<coursecompletion_id>/", methods=["POST"])
 @login_required
-def courses_set_done(course_id):
+def courses_set_done(coursecompletion_id):
     t = Course.query.get(student_id)
     t.coursenumber = 0
     db.session().commit()
@@ -41,9 +41,9 @@ def courses_create():
   
     return redirect(url_for("courses_index"))
 
-@app.route("/courses/del/<course_id>", methods=["POST"])
+@app.route("/courses/del/<coursecompletion_id>", methods=["POST"])
 @login_required(role="USER")
-def courses_delete(course_id):
+def courses_delete(coursecompletion_id):
     t = Course.query.get(course_id)
     db.session().delete(t)
     db.session().commit()

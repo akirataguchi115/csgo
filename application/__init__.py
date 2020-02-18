@@ -21,7 +21,7 @@ from flask_login import LoginManager, current_user
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-login_manager.login_view = "auth_login"
+login_manager.login_view = "students_login"
 login_manager.login_message = "Please login to use this functionality."
 
 
@@ -50,6 +50,9 @@ from application import views
 
 from application.students import models
 from application.students import views
+
+from application.coursecompletions import models
+from application.coursecompletions import views
 
 from application.courses import models
 from application.courses import views

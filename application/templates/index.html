@@ -1,23 +1,20 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<p>
-  Hello world!
-</p>
 <div>
   {% if current_user.is_authenticated %}
-  {% if needs_students is defined %}
-    <p>The following users need to register their students:</p>
-    <ul>
-	  {% for user in needs_students %}
-      <li>
-       <b>User id: </b>{{user.id}}<b> User name: </b>{{user.name}}
-      </li>
-	  {% endfor %}
-    </ul>
+    {% if needs_students is defined %}
+      <p>The following users need to register their students:</p>
+      <ul>
+	    {% for user in needs_students %}
+        <li>
+        <b>User id: </b>{{user.id}}<b> User name: </b>{{user.name}}
+        </li>
+	    {% endfor %}
+      </ul>
+    {% endif %}
   {% else %}
-  <p>Welcome to CSGO! Login/Register from the right upper corner. </p>
+    <p>Welcome to CSGO! Login/Register from the right upper corner. </p>
   {% endif %}
 </div>
-{% endif %}
 {% endblock %}

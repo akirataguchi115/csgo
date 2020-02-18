@@ -10,7 +10,7 @@ class Student(Base):
     username = db.Column(db.String(144), nullable=False)
     password = db.Column(db.String(144), nullable=False)
 
-    courses = db.relationship("Course", backref='student', lazy=True)
+    coursecompletions = db.relationship("Coursecompletion", backref='student', lazy=True)
 
     def __init__(self, name, username, password):
         self.name = name
