@@ -5,6 +5,9 @@ from application import app, db, login_required
 from application.coursecompletions.models import Coursecompletion 
 from application.coursecompletions.forms import CoursecompletionForm
 
+from application.courses.models import Course
+from application.courses.forms import CourseForm
+
 @app.route("/coursecompletions", methods=["GET"])
 @login_required
 def coursecompletions_index():
@@ -13,7 +16,11 @@ def coursecompletions_index():
 @app.route("/coursecompletions/new/")
 @login_required
 def coursecompletions_form():
-    return render_template("coursecompletions/new.html", form = CoursecompletionForm())
+    form = CoursecompletionForm()
+    courses = Course.query.all()
+    course_list = [(course.id, course.name) for course in courses]
+    form.course_id.choices = course_list
+    return render_template("coursecompletions/new.html", form = form)
 
 @app.route("/coursecompletions/<coursecompletion_id>/", methods=["POST"])
 @login_required
@@ -28,13 +35,16 @@ def coursecompletions_set_done(coursecompletion_id):
 @login_required(role="USER")
 def coursecompletions_create():
     form = CoursecompletionForm(request.form)
-
+    courses = Course.query.all()
+    course_list = [(course.id, course.name) for course in courses]
+    form.course_id.choices = course_list
+    print(form.course_id.choices)
     if not form.validate():
         return render_template("coursecompletions/new.html", form = form)
 
-    t = Coursecompletion(form.name.data)
-    t.startingdate = form.number.data
+    t = Coursecompletion(form.grade.data)
     t.student_id = current_user.id
+    t.course_id = form.course_id.data
 
     db.session().add(t)
     db.session().commit()

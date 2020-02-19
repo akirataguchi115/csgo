@@ -3,7 +3,7 @@ __pycache__
 
 # Vim undo and swap files
 *~*
-*.swp*
+*.sw*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

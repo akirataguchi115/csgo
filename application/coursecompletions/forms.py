@@ -1,9 +1,11 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, validators, IntegerField 
+from wtforms import StringField, validators, IntegerField, SelectField 
 
 class CoursecompletionForm(FlaskForm):
-    name = StringField("Course name", [validators.Length(min=2)])
-    number = IntegerField("Course starting date")
+    # startingdate = DateField("Starting Date")
+    # completiondate = DateField("Completion Date")
+    course_id = SelectField("Course", coerce=int)
+    grade = IntegerField("Course grade")
 
     class Meta:
         csrf = False

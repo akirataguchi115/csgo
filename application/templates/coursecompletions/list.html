@@ -10,7 +10,7 @@
     {% for coursecompletion in coursecompletions %}
     <tr>
       <td>{{ coursecompletion.name }}</td>
-      <td>{{ coursecompletion.coursecompletionnumber }}</td>
+      <td>{{ coursecompletion.grade }}</td>
       <td>
 	<form method="POST" action="{{ url_for('coursecompletions_set_done', coursecompletion_id=coursecompletion.id) }}">
 	  <input type="submit" value="Change ID to 0"/>
