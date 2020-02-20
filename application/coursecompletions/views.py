@@ -8,10 +8,21 @@ from application.coursecompletions.forms import CoursecompletionForm
 from application.courses.models import Course
 from application.courses.forms import CourseForm
 
+from sqlalchemy.sql import text
+
+
 @app.route("/coursecompletions", methods=["GET"])
 @login_required
 def coursecompletions_index():
-    return render_template("coursecompletions/list.html", coursecompletions = Coursecompletion.query.filter(Coursecompletion.student_id == current_user.id))
+    stmt = text("SELECT Course.name, Coursecompletion.grade FROM Course"
+                " LEFT JOIN Coursecompletion ON Course.id = Coursecompletion.course_id"
+                " WHERE Coursecompletion.student_id = :student_id").params(student_id=current_user.id)
+    coursecompletions = []
+    result = db.engine.execute(stmt)
+    for row in result:
+        coursecompletions.append({"name":row[0], "grade":row[1]})
+
+    return render_template("coursecompletions/list.html", coursecompletions=coursecompletions)
 
 @app.route("/coursecompletions/new/")
 @login_required
@@ -25,8 +36,8 @@ def coursecompletions_form():
 @app.route("/coursecompletions/<coursecompletion_id>/", methods=["POST"])
 @login_required
 def coursecompletions_set_done(coursecompletion_id):
-    t = Coursecompletion.query.get(student_id)
-    t.coursecompletionnumber = 0
+    t = Coursecompletion.query.get(coursecompletion_id)
+    t.grade = 0
     db.session().commit()
 
     return redirect(url_for("coursecompletions_index"))

@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <table>
+  <table cellpadding="5">
     <tr>
       <th>Course name</th>
       <th>Study points</th>
@@ -10,16 +10,17 @@
     {% for coursecompletion in coursecompletions %}
     <tr>
       <td>{{ coursecompletion.name }}</td>
-      <td>{{ coursecompletion.grade }}</td>
+      <td align="center">{{ coursecompletion.grade }}</td>
       <td>
-	<form method="POST" action="{{ url_for('coursecompletions_set_done', coursecompletion_id=coursecompletion.id) }}">
-	  <input type="submit" value="Change ID to 0"/>
-	</form>
+	      <form method="POST" action="{{ url_for('coursecompletions_set_done', coursecompletion_id=coursecompletion.id) }}">
+	      <input type="submit" value="Change ID to 0"/>
+	      </form>
       </td>
-    <td>
-    <form method="POST" action="{{ url_for('coursecompletions_delete', coursecompletion_id=coursecompletion.id) }}">
-      <input type="submit" value="Remove CourseCompletion"/>
-    </td>
+      <td>
+        <form method="POST" action="{{ url_for('coursecompletions_delete', coursecompletion_id=coursecompletion.id) }}">
+          <input type="submit" value="Remove CourseCompletion"/>
+        </form>
+      </td>
     </tr>
     {% endfor %}
   </table>
