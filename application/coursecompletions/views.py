@@ -14,13 +14,13 @@ from sqlalchemy.sql import text
 @app.route("/coursecompletions", methods=["GET"])
 @login_required
 def coursecompletions_index():
-    stmt = text("SELECT Course.name, Coursecompletion.grade FROM Course"
+    stmt = text("SELECT Course.name, Coursecompletion.grade, Coursecompletion.id FROM Course"
                 " LEFT JOIN Coursecompletion ON Course.id = Coursecompletion.course_id"
                 " WHERE Coursecompletion.student_id = :student_id").params(student_id=current_user.id)
     coursecompletions = []
     result = db.engine.execute(stmt)
     for row in result:
-        coursecompletions.append({"name":row[0], "grade":row[1]})
+        coursecompletions.append({"name":row[0], "grade":row[1], "id":row[2]})
 
     return render_template("coursecompletions/list.html", coursecompletions=coursecompletions)
 
@@ -49,7 +49,6 @@ def coursecompletions_create():
     courses = Course.query.all()
     course_list = [(course.id, course.name) for course in courses]
     form.course_id.choices = course_list
-    print(form.course_id.choices)
     if not form.validate():
         return render_template("coursecompletions/new.html", form = form)
 
