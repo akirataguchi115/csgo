@@ -5,6 +5,9 @@ __pycache__
 *~*
 *.sw*
 
+# testikoodia
+*testikoodia*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

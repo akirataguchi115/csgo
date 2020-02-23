@@ -4,22 +4,42 @@
 
 <form method="POST" action="{{ url_for('coursecompletions_create') }}">
   <table>
-    <tr> 
-      {{form.course_id.label}}{{form.course_id}}
+    <tr>
+      <td>
+        {{form.course_id.label}}
+      </td>
+      <td>
+      {{form.course_id}}
+      </td>
+    </tr>
+    <tr>
       <ul>
         {% for error in form.grade.errors %}
         <li>{{ error }}</li>
         {% endfor %}
       </ul>
-    </tr>
-    <tr>
       <td>
         {{ form.grade.label }}
       </td>
       <td>
         {{ form.grade }}
       </td>
+    </tr>
     <tr>
+      <td>
+        {{form.startingdate.label}}
+      </td>
+      <td>
+      {{form.startingdate}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{form.completiondate.label}}
+      </td>
+      <td>
+      {{form.completiondate}}
+      </td>
     </tr>
     <tr>
       <td colspan="2">

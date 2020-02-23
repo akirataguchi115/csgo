@@ -14,13 +14,13 @@ from sqlalchemy.sql import text
 @app.route("/coursecompletions", methods=["GET"])
 @login_required
 def coursecompletions_index():
-    stmt = text("SELECT Course.name, Coursecompletion.grade, Coursecompletion.id FROM Course"
+    stmt = text("SELECT Course.name, Coursecompletion.grade, Coursecompletion.startingdate, Coursecompletion.completiondate, Coursecompletion.id FROM Course"
                 " LEFT JOIN Coursecompletion ON Course.id = Coursecompletion.course_id"
                 " WHERE Coursecompletion.student_id = :student_id").params(student_id=current_user.id)
     coursecompletions = []
     result = db.engine.execute(stmt)
     for row in result:
-        coursecompletions.append({"name":row[0], "grade":row[1], "id":row[2]})
+        coursecompletions.append({"name":row[0], "grade":row[1], "startingdate":row[2], "completiondate":row[3], "id":row[4], "prequisitesmeet":True})
 
     return render_template("coursecompletions/list.html", coursecompletions=coursecompletions)
 
@@ -33,15 +33,6 @@ def coursecompletions_form():
     form.course_id.choices = course_list
     return render_template("coursecompletions/new.html", form = form)
 
-@app.route("/coursecompletions/<coursecompletion_id>/", methods=["POST"])
-@login_required
-def coursecompletions_set_done(coursecompletion_id):
-    t = Coursecompletion.query.get(coursecompletion_id)
-    t.grade = 0
-    db.session().commit()
-
-    return redirect(url_for("coursecompletions_index"))
-
 @app.route("/coursecompletions/", methods=["POST"])
 @login_required(role="USER")
 def coursecompletions_create():
@@ -52,20 +43,32 @@ def coursecompletions_create():
     if not form.validate():
         return render_template("coursecompletions/new.html", form = form)
 
-    t = Coursecompletion(form.grade.data)
-    t.student_id = current_user.id
-    t.course_id = form.course_id.data
+    coursecompletion = Coursecompletion(form.grade.data)
+    coursecompletion.student_id = current_user.id
+    coursecompletion.course_id = form.course_id.data
+    courscompletion.startingdate = form.startingdate.data
+    coursecompletion.completiondate = form.completiondate.data
 
-    db.session().add(t)
+    db.session().add(coursecompletion)
     db.session().commit()
   
     return redirect(url_for("coursecompletions_index"))
 
+@app.route("/coursecompletions/<coursecompletion_id>/", methods=["POST"])
+@login_required
+def coursecompletions_set_done(coursecompletion_id):
+    cc = Coursecompletion.query.get(coursecompletion_id)
+    cc.grade = 0
+    db.session().commit()
+
+    return redirect(url_for("coursecompletions_index"))
+
+
 @app.route("/coursecompletions/del/<coursecompletion_id>", methods=["POST"])
 @login_required(role="USER")
 def coursecompletions_delete(coursecompletion_id):
-    t = Coursecompletion.query.get(coursecompletion_id)
-    db.session().delete(t)
+    cc = Coursecompletion.query.get(coursecompletion_id)
+    db.session().delete(cc)
     db.session().commit()
 
     return redirect(url_for("coursecompletions_index"))

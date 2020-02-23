@@ -5,13 +5,22 @@
     <tr>
       <th>Course name</th>
       <th>Grade</th>
+      <th>Starting date</th>
+      <th>Completion date</th>
+      <th>Do the prequisites meet?</th>
     </tr>
     {% for coursecompletion in coursecompletions %}
     <tr>
-      <td>{{ coursecompletion.name }}</td>
+      <td align="center">{{ coursecompletion.name }}</td>
       <td align="center">{{ coursecompletion.grade }}</td>
-      <td>
-	      <form method="POST" action="{{ url_for('coursecompletions_set_done', coursecompletion_id=coursecompletion.id) }}">
+      <td align="center">{{ coursecompletion.startingdate }}</td>
+      <td align="center">{{ coursecompletion.completiondate }}</td>
+      {% if coursecompletion.prequisitesmeet %}
+      <td align="center">All good :)</td>
+      {% else %}
+      <td align="center">Not so good :(</td>
+      {% endif %}
+	    <form method="POST" action="{{ url_for('coursecompletions_set_done', coursecompletion_id=coursecompletion.id) }}">
 	      <input type="submit" value="Change grade to 0"/>
 	      </form>
       </td>
