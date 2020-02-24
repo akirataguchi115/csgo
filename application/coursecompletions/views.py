@@ -46,7 +46,7 @@ def coursecompletions_create():
     coursecompletion = Coursecompletion(form.grade.data)
     coursecompletion.student_id = current_user.id
     coursecompletion.course_id = form.course_id.data
-    courscompletion.startingdate = form.startingdate.data
+    coursecompletion.startingdate = form.startingdate.data
     coursecompletion.completiondate = form.completiondate.data
 
     db.session().add(coursecompletion)
@@ -57,8 +57,8 @@ def coursecompletions_create():
 @app.route("/coursecompletions/<coursecompletion_id>/", methods=["POST"])
 @login_required
 def coursecompletions_set_done(coursecompletion_id):
-    cc = Coursecompletion.query.get(coursecompletion_id)
-    cc.grade = 0
+    coursecompletion = Coursecompletion.query.get(coursecompletion_id)
+    coursecompletion.grade = 0
     db.session().commit()
 
     return redirect(url_for("coursecompletions_index"))
@@ -67,8 +67,8 @@ def coursecompletions_set_done(coursecompletion_id):
 @app.route("/coursecompletions/del/<coursecompletion_id>", methods=["POST"])
 @login_required(role="USER")
 def coursecompletions_delete(coursecompletion_id):
-    cc = Coursecompletion.query.get(coursecompletion_id)
-    db.session().delete(cc)
+    coursecompletion = Coursecompletion.query.get(coursecompletion_id)
+    db.session().delete(coursecompletion)
     db.session().commit()
 
     return redirect(url_for("coursecompletions_index"))
