@@ -1,9 +1,9 @@
 from flask import render_template, request, redirect, url_for
 from flask_login import login_user, logout_user
 
-from application import app, db
+from application import app, db, login_required
 from application.students.models import Student 
-from application.students.forms import LoginForm, RegisterForm
+from application.students.forms import LoginForm, RegisterForm, UpdateForm
 
 @app.route("/students/login", methods = ["GET", "POST"])
 def students_login():
@@ -30,11 +30,36 @@ def students_logout():
 @app.route("/students/register", methods = ["GET", "POST"])
 def students_register():
     if request.method == "GET":
-            return render_template("students/registerform.html", form = RegisterForm())
+        return render_template("students/registerform.html", form = RegisterForm())
 
     form = RegisterForm(request.form)
-    s = Student(form.username.data, form.password.data, form.name.data, form.studentnumber.data)
+    student = Student(form.username.data, form.password.data, form.name.data, form.studentnumber.data)
 
-    db.session().add(s)
+    db.session().add(student)
     db.session().commit()
     return redirect(url_for("index"))
+
+@app.route("/students/update/<student_id>/", methods = ["GET", "POST"])
+@login_required
+def students_update(student_id):
+    if request.method == "GET":
+        return render_template("students/updateform.html", form = UpdateForm())
+
+    form = UpdateForm(request.form) 
+    student = Student.query.get(student_id)
+    if form.passwordagain.data == student.password:
+        student.password = form.password.data
+        student.name = form.name.data
+    
+        db.session().commit()
+        return redirect(url_for("index"))
+    else:
+        return redirect(url_for("students_update", student_id=student_id))
+
+@app.route("/students/delete/<student_id>", methods = ["POST"])
+@login_required
+def students_delete(student_id):
+    student_to_delete = Student.query.get(student_id)
+    db.session().delete(student_to_delete)
+    db.session().commit()
+    return redirect(url_for("students_logout"))

@@ -56,9 +56,10 @@ def coursecompletions_create():
 
 @app.route("/coursecompletions/<coursecompletion_id>/", methods=["POST"])
 @login_required
-def coursecompletions_set_done(coursecompletion_id):
+def coursecompletions_changegrade(coursecompletion_id):
     coursecompletion = Coursecompletion.query.get(coursecompletion_id)
-    coursecompletion.grade = 0
+    grade = 0
+    coursecompletion.grade = grade
     db.session().commit()
 
     return redirect(url_for("coursecompletions_index"))

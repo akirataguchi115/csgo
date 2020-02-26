@@ -21,8 +21,8 @@
       <td align="center">Not so good :(</td>
       {% endif %}
       <td>
-	    <form method="POST" action="{{ url_for('coursecompletions_set_done', coursecompletion_id=coursecompletion.id) }}">
-	      <input type="submit" value="Change grade to 0"/>
+	    <form method="POST" action="{{ url_for('coursecompletions_changegrade', coursecompletion_id=coursecompletion.id) }}">
+	      <input type="submit" value="Adjust grade"/>
 	      </form>
       </td>
       <td>

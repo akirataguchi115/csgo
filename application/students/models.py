@@ -11,7 +11,7 @@ class Student(Base):
     studentnumber = db.Column(db.Integer, nullable=False)
     name = db.Column(db.String(144), nullable=False)
 
-    coursecompletions = db.relationship("Coursecompletion", backref='student', lazy=True)
+    coursecompletions = db.relationship("Coursecompletion", backref='student', lazy=True, cascade="all, delete-orphan")
 
     def __init__(self, username, password, name, studentnumber):
         self.username = username

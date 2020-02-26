@@ -16,3 +16,11 @@ class RegisterForm(FlaskForm):
    
     class Meta:
         csrf = False
+        
+class UpdateForm(FlaskForm):
+    passwordagain = PasswordField("Old password")
+    password = PasswordField("New password")
+    name = StringField("New Name")
+   
+    class Meta:
+        csrf = False

@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{{ error }}
+<form method="POST" action="{{ url_for('students_update', student_id=current_user.id) }}">
+  <p>Change your password and name then click the  <i>Update</i> -button:</p>
+	<div class="form-group">
+		<table>
+    <tr>
+      <td>
+	      {{ form.passwordagain.label }}
+      </td>
+      <td>
+	      {{ form.passwordagain }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+	      {{ form.password.label }}
+      </td>
+      <td>
+	      {{ form.password }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+	      {{ form.name.label }}
+      </td>
+      <td>
+	      {{ form.name }}
+      </td>
+    </tr>
+  </div>
+    <tr>
+      <td colspan="2">
+	<input type="submit" class="btn btn-primary" value="Update"/>
+      </td>
+    </tr>
+</form>
+  <tr>
+    <td>
+      <form method="POST" action="{{ url_for('students_delete', student_id=current_user.id) }}">
+	      <input type="submit" class="btn btn-danger" value="Delete student account permanently"/>
+	    </form>
+    </td>
+  </tr>
+{% endblock %}
