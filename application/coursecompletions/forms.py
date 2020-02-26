@@ -9,3 +9,9 @@ class CoursecompletionForm(FlaskForm):
 
     class Meta:
         csrf = False
+
+class CoursecompletionGradeForm(FlaskForm):
+    grade = SelectField("New grade", coerce=int)
+
+    class Meta:
+        csrf = False
