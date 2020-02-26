@@ -14,15 +14,7 @@ from sqlalchemy.sql import text
 @app.route("/coursecompletions", methods=["GET"])
 @login_required
 def coursecompletions_index():
-    stmt = text("SELECT Course.name, Coursecompletion.grade, Coursecompletion.startingdate, Coursecompletion.completiondate, Coursecompletion.id FROM Course"
-                " LEFT JOIN Coursecompletion ON Course.id = Coursecompletion.course_id"
-                " WHERE Coursecompletion.student_id = :student_id").params(student_id=current_user.id)
-    coursecompletions = []
-    result = db.engine.execute(stmt)
-    for row in result:
-        coursecompletions.append({"name":row[0], "grade":row[1], "startingdate":row[2], "completiondate":row[3], "id":row[4], "prequisitesmeet":True})
-
-    return render_template("coursecompletions/list.html", coursecompletions=coursecompletions)
+    return render_template("coursecompletions/list.html", coursecompletions=Coursecompletion.list_courses(), count_completions=Coursecompletion.count_completions(), grade_average=Coursecompletion.grade_average())
 
 @app.route("/coursecompletions/new/")
 @login_required

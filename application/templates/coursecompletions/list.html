@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <table cellpadding="5">
+  <table cellpadding="8">
     <tr>
       <th>Course name</th>
       <th>Grade</th>
@@ -32,5 +32,10 @@
       </td>
     </tr>
     {% endfor %}
+    <tr>
+      <td>
+        <h1 class="lead">You have scheduled <b>{{ count_completions }}</b> courses in total with an average grade of <b>{{ grade_average }}</b> !</h1>
+      </td>
+    </tr>
   </table>
 {% endblock %}
