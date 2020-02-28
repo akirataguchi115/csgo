@@ -32,7 +32,7 @@ class Coursecompletion(Base):
             result = db.engine.execute(stmt)
             prequisitesmeet = True
             for nextrow in result:
-                if datetime.strptime(row[2], "%Y-%m-%d") < datetime.strptime(nextrow[0], "%Y-%m-%d"):
+                if row[2] < nextrow[0]:
                         prequisitesmeet = False
                         break
             coursecompletions.append({"name":row[0], "grade":row[1], "startingdate":row[2], "completiondate":row[3], "id":row[4], "prequisitesmeet":prequisitesmeet})
