@@ -35,8 +35,6 @@ class Coursecompletion(Base):
                 if datetime.strptime(row[2], "%Y-%m-%d") < datetime.strptime(nextrow[0], "%Y-%m-%d"):
                         prequisitesmeet = False
                         break
-                print("päivämäärä tähän: ", nextrow[0])
-                print("alkuperäisen kurssin aloituspvm: ", row[2])
             coursecompletions.append({"name":row[0], "grade":row[1], "startingdate":row[2], "completiondate":row[3], "id":row[4], "prequisitesmeet":prequisitesmeet})
 
         return coursecompletions

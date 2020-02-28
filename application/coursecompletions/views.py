@@ -4,20 +4,18 @@ from flask_login import current_user
 from application import app, db, login_required 
 from application.coursecompletions.models import Coursecompletion 
 from application.coursecompletions.forms import CoursecompletionForm
-
 from application.courses.models import Course
-from application.courses.forms import CourseForm
 
 from sqlalchemy.sql import text
 
 
 @app.route("/coursecompletions", methods=["GET"])
-@login_required
+@login_required(role="USER")
 def coursecompletions_index():
     return render_template("coursecompletions/list.html", coursecompletions=Coursecompletion.list_courses(), count_completions=Coursecompletion.count_completions(), grade_average=Coursecompletion.grade_average())
 
 @app.route("/coursecompletions/new/")
-@login_required
+@login_required(role="USER")
 def coursecompletions_form():
     form = CoursecompletionForm()
     courses = Course.query.all()

@@ -40,7 +40,7 @@ def students_register():
     return redirect(url_for("index"))
 
 @app.route("/students/update/<student_id>/", methods = ["GET", "POST"])
-@login_required
+@login_required(role="USER")
 def students_update(student_id):
     if request.method == "GET":
         return render_template("students/updateform.html", form = UpdateForm())
@@ -57,7 +57,7 @@ def students_update(student_id):
         return redirect(url_for("students_update", student_id=student_id))
 
 @app.route("/students/delete/<student_id>", methods = ["POST"])
-@login_required
+@login_required(role="USER")
 def students_delete(student_id):
     student_to_delete = Student.query.get(student_id)
     db.session().delete(student_to_delete)
