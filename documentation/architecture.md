@@ -19,16 +19,16 @@ The diagram was made with [draw.io](https://draw.io)
 ```SQL
 CREATE TABLE Student (
   id INTEGER
-  username VARCHAR(64)
-  password VARCHAR(64)
+  username VARCHAR(128)
+  password VARCHAR(128)
   studentnumber INTEGER
-  name VARCHAR(64)
+  name VARCHAR(128)
   PRIMARY KEY (id)
 );
 
 CREATE TABLE Course (
   id INTEGER
-  name VARCHAR(64)
+  name VARCHAR(128)
   points INTEGER
   PRIMARY KEY (id)
 );
