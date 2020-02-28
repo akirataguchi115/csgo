@@ -48,4 +48,5 @@ CREATE TABLE Prequisitecourse (
     REFERENCES Course(id)
   FOREIGN KEY (prequisite_id)
     REFERENCES Course(id)
+);
 ```
