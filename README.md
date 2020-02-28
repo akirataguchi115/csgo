@@ -9,4 +9,4 @@ The application is live [here](https://csgoplanner.herokuapp.com/). One can test
 * [Database structure](https://github.com/akirataguchi115/csgo/blob/master/documentation/architecture.md)
 ## Other
 ![Achecker passed](https://github.com/akirataguchi115/csgo/blob/master/documentation/acheck.jpg)
-AChecker - The Web Accessibility Checker found no Known problems, Likely Problems or Potential Problems associated with accessibility on Heroku build v53.
+AChecker - The Web Accessibility Checker found 0 Known problems, 0 Likely Problems, 30 Potential Problems associated only with the usage of Bootstrap and 0 HTML problems asocciated to accessibility on Heroku build v95.
