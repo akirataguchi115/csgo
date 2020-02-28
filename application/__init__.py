@@ -54,6 +54,8 @@ from application.students import views
 from application.coursecompletions import models
 from application.coursecompletions import views
 
+from application.prequisitecourses import models
+
 # login functionality part 2
 from application.students.models import Student
 

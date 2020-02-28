@@ -6,10 +6,10 @@ from sqlalchemy.sql import text
 class Student(Base):
     __tablename__ = "student"
 
-    username = db.Column(db.String(144), nullable=False)
-    password = db.Column(db.String(144), nullable=False)
+    username = db.Column(db.String(128), nullable=False)
+    password = db.Column(db.String(128), nullable=False)
     studentnumber = db.Column(db.Integer, nullable=False)
-    name = db.Column(db.String(144), nullable=False)
+    name = db.Column(db.String(128), nullable=False)
 
     coursecompletions = db.relationship("Coursecompletion", backref='student', lazy=True, cascade="all, delete-orphan")
 
