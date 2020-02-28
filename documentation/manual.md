@@ -4,7 +4,7 @@ To use most of the function on the application the user must register to the sit
 ## Login
 Just like the registering Logging in can be done from the upper right corner. Due to accessibility reasons autofocus is on the username field so the user doesn't have to click it every time he/she logs in.
 ## Adding courses and prequisite courses
-The admin must add the courses manually via SQL (see [database architecture](https://github.com/akirataguchi115/csgo/blob/master/documentation/architecture.md))
+The admin must add the courses and prequisite courses manually via SQL(see [database architecture](https://github.com/akirataguchi115/csgo/blob/master/documentation/architecture.md)).
 ## Scheduling courses
 While logged in the user can schedule their courses. Click the _Schedule a Course_ -button from navigation bar. Select the course you wish to schedule from the dropdown menu. Insert the scheduled/received grade that is between 1 and 5. Insert the course starting date and completion date in the following format: `YYYY-MM-DD` (these are required for the application to tell you if the schedule is chronologically correct). Once you're finished click the _Schedule a course_ -button. You will be redirected to the listing of your schedule. An example of filling the forms: ![schedule_example](https://github.com/akirataguchi115/csgo/blob/master/documentation/schedule_example.png)
 ## Listing all scheduled courses
