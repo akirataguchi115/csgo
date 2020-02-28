@@ -42,4 +42,10 @@ CREATE TABLE Coursecompletion (
   FOREIGN KEY (course_id)
     REFERENCES Course(id)
 );
+
+CREATE TABLE Prequisitecourse (
+  FOREIGN KEY (course_id)
+    REFERENCES Course(id)
+  FOREIGN KEY (prequisite_id)
+    REFERENCES Course(id)
 ```
